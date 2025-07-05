@@ -4,8 +4,12 @@
 
 SecureGenomics Engine is a platform for privacy-preserving genomic analysis using [Fully Homomorphic Encryption (FHE)](https://vitalik.eth.limo/general/2020/07/20/homomorphic.html). It lets scientists run population-scale studies, GWAS, allele frequency analysis — all without ever decrypting sensitive data.
 
+<p align="center">
+  <img src="https://images.emojiterra.com/google/android-12l/512px/1f9ec.png" alt="Image 2" width="200"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://vitalik.eth.limo/images/fhe/HomoEncrypt.png?1" alt="Image 1" width="200"/>
 
-![simplemind](https://vitalik.eth.limo/images/fhe/HomoEncrypt.png?1)
+</p>
 
 Built for:
 - 🧪 Biobanks — monetize datasets without compromising privacy
