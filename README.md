@@ -14,6 +14,7 @@ Hyper-shareable
   
 Mathematically Verifiable
 - Every computation, data, and protocol is a cryptographic artifact
+- Scientific truth as a chain of commitments
 
 
 ## Computation Protocols
@@ -85,48 +86,16 @@ protocol-*
 ```
 e.g. Ancestry report on individual genome
 
-**Secure Data Share**
+
+## Constraints
+[bozmen.io/constrains-are-your-friends](https://bozmen.io/constrains-are-your-friends)
+- Single protocol language: Python
+- Deterministic outputs: no random number generator
+- On the server, data goes in/out encrypted and stays always such
+- Server can never accept a private key
 
 
-## Flow
 
-
-Client 1: data -> local compute -> encrypt -> upload to server
-Client 2: data -> local compute -> encrypt -> upload to server
-..
-Server: aggregated encrypted data -> compute -> encrypted result
-Receiver: download encrypted result -> decrypt -> interpret
-
-
-Slides > https://docs.google.com/presentation/d/1SukCLvEXRyfDW0yBySLjkYX7lw88qkNYt8BBJnEOrAM/edit?slide=id.p#slide=id.p
-
-
-## Other goals
+## Lower priority goals
 LLM-first
-– design API for AI Agents to process easily
-
-
-## Next
-
-### 🔐 Hash-Based Provenance: Scientific Truth as a Chain of Commitments
-
-Treat **every computation** as a cryptographically signed step:
-- Every input dataset has a hash
-- Every version of your code has a hash
-- Each computation step generates a new hash by combining:
-    - Data hash
-    - Code hash
-    - Config/parameter hash
-    - Previous step hash (for lineage)
-
-This results in a **chain of composable, tamper-proof proofs** that describe **exactly** how an output came to be — like Git commits, but across data + code + math.
-
-📌 **Even if you don’t share your input data**, others can **verify** that your output hash is consistent with what it should be, given the hash of your data and your open-source computation protocol. 
-
-
-
----
-
-**Built with ❤️ for privacy-preserving genomic research**
-
-*SecureGenomics CLI v0.1.0 - Making research more collaborative and private*
+– results, and API are easy to process for AI Agents
