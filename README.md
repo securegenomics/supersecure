@@ -34,7 +34,7 @@ protocol-*
 |
 |____________ config.yaml
 ```
-e.g. Allele Frequency Analysis, GWAS
+e.g. Allele Frequency Analysis, GWAS, Federated ML 
 
 **Private Query Homomorphic Encryption**
 ```
