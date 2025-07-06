@@ -1,114 +1,114 @@
-# SecureGenomics™
+# SuperSecure
 
-**Compute on encrypted data. Zero trust. Full science**
+**Computation platform built for secure scientific collaboration & cryptographically verifiable science**
 
-SecureGenomics Engine is a platform for privacy-preserving genomic analysis using [Fully Homomorphic Encryption (FHE)](https://vitalik.eth.limo/general/2020/07/20/homomorphic.html). It lets scientists run population-scale studies, GWAS, allele frequency analysis — all without ever decrypting sensitive data.
+Simplest way of doing privacy-preserving collaborative science. Native for [Fully Homomorphic Encryption (FHE)](https://vitalik.eth.limo/general/2020/07/20/homomorphic.html) and federated computation.
 
-&nbsp;&nbsp;&nbsp;
+## Manifesto
+Privacy-first
+- No data leaves local unencrypted
+- Server cannot decrypt data
 
-<p align="center">
-  <img src="https://images.emojiterra.com/google/android-12l/512px/1f9ec.png" alt="Image 2" width="240"/>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://vitalik.eth.limo/images/fhe/HomoEncrypt.png?1" alt="Image 1" width="240"/>
-</p>
-
-&nbsp;&nbsp;&nbsp;
-
-Built for
-- 🧪 Biobanks — monetize datasets without compromising privacy
-- 🌍 GDPR/HIPAA-safe by design
-- 🧠 Researchers — collaborate across silos, globally, securely
-- 🔐 Privacy maximalists — zero-trust compute with cryptographic guarantees
+Hyper-shareable
+- Research protocols are github-repos
+  
+Mathematically Verifiable
+- Every computation, data, and protocol is a cryptographic artifact
 
 
-
-> ⚠️ Alpha stage — active research tool. Contributions & collaborations welcome.
-
-# How it works
-### Bob (scientist) 👨
-On his laptop 💻
-```python
-# Bob creates a new project
-$ securegenomics project create
-# ☝️ this command, asks Bob to choose an open-source, shareable experiment protocol from https://github.com/securegenomics/ . He chooses `protocol-alzheimers-sensitive-allele-frequency`. All protocols involve scripts for encoding, encryption, computation, decoding, and result interpretation
-
-# Bob generates a public-private crypto context pair
-$ securegenomics crypto_context generate <project-id> 
-# ☝️ this command, under the hood, uploads public crypto context to the SecureGenomics server
+## Computation Protocols
+**Multi-party Homomorphic Encryption**
 ```
-
-### Alice (owns sensitive data) 👩
-On her computer 🖥️
-```bash
-# 👨 – Hey Alice, can you contribute to my new experiment with your DNA?
-# 👩 – Sure, I love science! But, but I also love my privacy :(
-# 👨 – Don't worry, I know an awesome secure tool to do this! Use my <project-id>, encrypt your data and upload to the server!
-# 👩 – Cool!
-
-# Alice encodes her genomic data, using the project id
-$ securegenomics data encode <project-id> data.vcf
-
-# Alice encrypts her genomic data with Bob's public key
-$ securegenomics data encrypt <project-id> data.vcf.encoded 
-# ☝️ under the hood, it downloads public crypto context from SecureGenomics server
-
-# Alice uploads encrypted data to the server
-$ securegenomics data upload <project-id> data.vcf.encrypted
-
-# ℹ️ All above commands use the online protocol code from shared experiment Github repository.
-# 🔐 Protocol code scripts are hashed and signs all steps (knowing this isn't essential now, but helpful later)
+protocol-*
+|____________ receiver_generate_keys.py
+|
+|____________ client_compute.py
+|____________ client_encrypt.py
+|
+|____________ server_compute.py
+|
+|____________ receiver_decrypt.py
+|____________ receiver_interpret.py
+|
+|
+|____________ config.yaml
 ```
+e.g. Allele Frequency Analysis, GWAS
 
-### Others (own sensitive data too)
-On their local computers 💻
-```python
-# Think what happened just above, and imagine a for loop with Dave, Frank, George, Carol, ...
+**Private Query Homomorphic Encryption**
 ```
-
-### Same Bob again (the scientist) 👨
-On his laptop 💻
-```python
-# Checks his project, and sees all his friends uploaded– 100s of encrypted genomes! 
-$ securegenomics project view <project-id>
-
-# Bob now runs the experiment
-$ securegenomics project run <project-id>
-# ☝️ FHE computation, as described in the protocol, is performed on the server.
-
-# After, he downloads and decrypt experiment results with his private key
-$ securegenomics project result <project-id>
+protocol-*
+|____________ receiver_generate_keys.py
+|____________ receiver_compute.py
+|____________ receiver_encrypt.py
+|
+|____________ client_compute.py
+|____________ client_encrypt.py
+|____________ client_query.py
+|
+|____________ receiver_decrypt.py
+|____________ receiver_interpret.py
+|
+|
+|____________ config.yaml
 ```
+e.g. Drug discovery company tests its drug target variants on biobank data
 
-What really happened?
-- 🙋‍♂️ Bob is happy, because he did an analysis on lots of people's DNA
-- 🙋‍♀️ Alice and other contributors are happy, because they kept their DNA private (cryptographically guaranteed)
-- 🗄️🔐 Data was always in encrypted form on the server
+**Secure Two-Party Computation (2PC)**
+```
+protocol-*
+|____________ client_1_generate_keys.py
+|____________ client_1_compute.py
+|____________ client_1_encrypt.py
+|
+|____________ client_2_generate_keys.py
+|____________ client_2_compute.py
+|____________ client_2_encrypt.py
+|
+|____________ server_compute.py
+|
+|____________ client_1_decrypt.py
+|____________ client_1_interpret.py
+|
+|____________ client_2_decrypt.py
+|____________ client_2_interpret.py
+|
+|____________ config.yaml
+```
+e.g. Paternal DNA test, where only participants can decrypt the result
 
-## Experiment Protocols
-Main Hub - [github.com/orgs/securegenomics/repositories](https://github.com/orgs/securegenomics/repositories)
+**Local Only**
+```
+protocol-*
+|____________ local_compute.py
+|____________ config.yaml
+```
+e.g. Ancestry report on individual genome
 
-Pick a research protocol above, or create your custom protocol and merge into this repo.
-
-This is the truth base for all computations. You can verify and prove others which computation script was used in your experiment.
-
-> Hyper-sharable, cryptographically verifiable science.
-
-# Resources
-- [docs/guide.md](docs/guide.md)
-    - for users – installation & commands
-- [docs/design.md](docs/design.md)
-    - for developers
-- [github.com/barisozmen/genomic-privacy-book/](https://github.com/barisozmen/genomic-privacy-book/)
-    - Categorization of genomic privacy concerns ([see](https://github.com/barisozmen/genomic-privacy-book/blob/main/02-genomic_privacy_concerns.md))
-    - Private vs Public Genomic Data ([see](https://github.com/barisozmen/genomic-privacy-book/blob/main/04a-private_genome_silos.md))
-    - FHE mathematical foundations ([fhe](https://github.com/barisozmen/genomic-privacy-book/blob/main/06-homomorphic_encryption_he.md), [math overview](https://github.com/barisozmen/genomic-privacy-book/blob/main/06aa-math_foundations_overview.md), [algebra](https://github.com/barisozmen/genomic-privacy-book/blob/main/06ab-algebra_foundations.md), [lattice-based cryptography](https://github.com/barisozmen/genomic-privacy-book/blob/main/06ac-lattice_based_cryptography_foundations.md))
-    - Privacy technologies overview ([see](https://github.com/barisozmen/genomic-privacy-book/blob/main/03-privacy_technologies.md))
-   
+**Secure Data Share**
 
 
-# What is cooking?
+## Flow
 
-## 🔐 Hash-Based Provenance: Scientific Truth as a Chain of Commitments
+
+Client 1: data -> local compute -> encrypt -> upload to server
+Client 2: data -> local compute -> encrypt -> upload to server
+..
+Server: aggregated encrypted data -> compute -> encrypted result
+Receiver: download encrypted result -> decrypt -> interpret
+
+
+Slides > https://docs.google.com/presentation/d/1SukCLvEXRyfDW0yBySLjkYX7lw88qkNYt8BBJnEOrAM/edit?slide=id.p#slide=id.p
+
+
+## Other goals
+LLM-first
+– design API for AI Agents to process easily
+
+
+## Next
+
+### 🔐 Hash-Based Provenance: Scientific Truth as a Chain of Commitments
 
 Treat **every computation** as a cryptographically signed step:
 - Every input dataset has a hash
