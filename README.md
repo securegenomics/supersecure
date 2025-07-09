@@ -9,10 +9,14 @@ Privacy-first
 - No data leaves local unencrypted
 - Server cannot decrypt data
 
+Local-first
+- Anything can be done on local will be
+  
 Hyper-shareable
 - Research protocols are github-repos
-  
-Mathematically Verifiable
+
+Instantly Verifiable Science (partially[^1])
+- When you see a paper claiming a result, you should have a high-trust that the computation was run on our platform as advertised, obtaining the claimed result.
 - Every computation, data, and protocol is a cryptographic artifact
 - Scientific truth as a chain of commitments
 
@@ -99,3 +103,8 @@ e.g. Ancestry report on individual genome
 ## Lower priority goals
 LLM-first
 – results, and API are easy to process for AI Agents
+
+
+
+---
+[^1]: Full cryprographic verification of computations is computationally too expensive for most type of computations (see ZK circuits). That's why, we aim to go with weak-verification, where the computation is marked as verified by our platform, that can be checked by hashes of all the artificats (inputs, code, output). We aim to be a trusted layer. We are in search of better approaches that can be feasible (ideally with mathematical guarantees). If you have any ideas on this, please let us know in github issues or reach us at hbaristr@gmail.com!
