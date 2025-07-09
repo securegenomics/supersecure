@@ -8,9 +8,6 @@ Simplest way of doing privacy-preserving collaborative science. Native for [Full
 Privacy-first
 - No data leaves local unencrypted
 - Server cannot decrypt data
-
-Local-first
-- Anything can be done on local will be
   
 Hyper-shareable
 - Research protocols are github-repos
@@ -20,6 +17,10 @@ Instantly Verifiable Science (partially[^1])
 - Every computation, data, and protocol is a cryptographic artifact
 - Scientific truth as a chain of commitments
 
+### Corollaries
+Local-first
+- Anything can be done on local will be
+- corollary of privacy-first
 
 ## Computation Protocols
 **Multi-party Homomorphic Encryption**
